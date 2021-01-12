@@ -1,11 +1,14 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
-const uri = 'mongodb+srv://dbHomeControl:alumbra2021@cluster0.g2yvm.mongodb.net/homeControlDB?retryWrites=true&w=majority'
+const uri = process.env.DB_CONNECTION
 
 const connectDB = async () => {
     await mongoose.connect(uri, {
+        useNewUrlParser: true,
         useUnifiedTopology: true,
-        useNewUrlParser: true
+        useFindAndModify: false,
+        useCreateIndex: true
     });
     console.log("db connected")
 }

@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
 
 const user = new mongoose.Schema({
-    firstName: { type: String },
-    lastName: { type: String }
+    name: { type: String, required: true},
+    date: { type: String, required: true },
+    body: { type: String, required: true },
+    size: { type: Number, required: true }
 });
 
-module.exports = User = mongoose.model('user', user)
+module.exports = User = mongoose.model('scheduled', user)
