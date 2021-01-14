@@ -10,6 +10,6 @@ connectDB()
 app.use(express.json({ extended: false }))
 app.use('/api/userModel', require('./API/User'))
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT || 3001)
 
 
