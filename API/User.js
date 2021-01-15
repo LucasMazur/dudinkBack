@@ -5,6 +5,7 @@ const route = express.Router()
 
 route.post('/save', async(req, res) => {
     const { name, date, body, size } = req.body
+    console.log(req.body.date)
     let user = {};
     user.name = name
     user.date = date
