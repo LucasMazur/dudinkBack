@@ -4,15 +4,6 @@ const { Mongoose } = require('mongoose')
 const user = require('../DB/User')
 const route = express.Router()
 
-async function getAlbum() {
-    const response = await axios.get("https://photos.app.goo.gl/J5CXTwNKh9uL6d4o7")
-    return response.data
-}
-
-route.get('/teste', async (req, res) => {
-    console.log(getAlbum())
-})
-
 route.post('/save', async(req, res) => {
     const { name, date, body, size } = req.body
     console.log(req.body.date)
