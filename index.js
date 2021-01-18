@@ -10,6 +10,7 @@ connectDB()
 app.use(express.json({ extended: false }))
 app.use('/api/userModel', require('./API/User'))
 app.use('/api/confirmModel', require('./API/Confirm'))
+app.use('/api/imageModel', require('./API/AddImages'))
 
 app.listen(process.env.PORT || 3001)
 
