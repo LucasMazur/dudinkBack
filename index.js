@@ -8,9 +8,9 @@ const app = express()
 app.use(cors())
 connectDB()
 app.use(express.json({ extended: false }))
-app.use('/api/userModel', require('./API/User'))
-app.use('/api/confirmModel', require('./API/Confirm'))
-app.use('/api/imageModel', require('./API/AddImages'))
+app.use('/api/client', require('./API/Client'))
+app.use('/api/images', require('./API/Image'))
+app.use('/api/themes', require('./API/Themes'))
 
 app.listen(process.env.PORT || 3001)
 

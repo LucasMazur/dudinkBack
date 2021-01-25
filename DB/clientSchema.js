@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 
-const user = new mongoose.Schema({
+const client = new mongoose.Schema({
     name: { type: String, required: true},
+    dateHour: { type: String, required: true },
     date: { type: String, required: true },
+    hour: { type: String, required: true },
     body: { type: String, required: true },
     size: { type: Number, required: true }
 });
 
-module.exports = User = mongoose.model('scheduled', user)
+module.exports = Client = mongoose.model('scheduled', client)

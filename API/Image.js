@@ -1,19 +1,23 @@
 const { response } = require('express')
 const express = require('express')
-const { Mongoose } = require('mongoose')
-const addimages = require('../DB/AddImages')
+const mongoose = require('mongoose')
+const imageSchema = require('../DB/imageSchema')
 const route = express.Router()
 const axios = require('axios')
 
 route.post('/save', async(req, res) => {
-    const { url, style } = req.body
+    const { imageName, url, style } = req.body
     let image = {};
+    image.imageName = imageName
     image.url = url
-    image.style = style
-    let imageModel = new AddImages(image)
+
+    const model = mongoose.model(`${style}`, imageSchema)
+
+    let imageModel = new model(image)
+
     await imageModel.save((err) => {
         if (!err) {
-            res.send("Save success")
+            res.send("Save image success")
             console.log("Save Succeful!!")            
         }
         else {
@@ -22,8 +26,11 @@ route.post('/save', async(req, res) => {
     })
 })
 
-route.get('/get', async (req, res) => {    
-    await AddImages.find({}, (err, doc) => {
+route.post('/get', async (req, res) => {
+    const style = req.body.style
+    const model = mongoose.model(`${style}`, imageSchema)
+
+    await model.find({}, (err, doc) => {
         if (!err) {
             res.json(doc)
         } else {
@@ -33,8 +40,11 @@ route.get('/get', async (req, res) => {
 })
 
 route.post('/remove', async (req, res) => {
-    console.log(req.body.del)  
-    await AddImages.findById(req.body.del, async (err, doc) => {
+    
+    const style = req.body.style
+    const model = mongoose.model(`${style}`, imageSchema)
+
+    await model.findById(req.body.del, async (err, doc) => {
         console.log(doc)
         if (!err) {
             await doc.remove()
