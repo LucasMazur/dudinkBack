@@ -49,27 +49,25 @@ route.post('/remove', async (req, res) => {
 })
 
 route.post('/update', async (req, res) => {
-    const { name, dateHour, date, hour, body, size, id } = req.body
+    const { name, date, hour, body, size, id } = req.body
     let client = {}
     client.id = id
     client.name = name
-    client.dateHour = dateHour
     client.date = date
     client.hour = hour
     client.body = body
     client.size = size
+
+    console.log(req.body)
     await Client.findById(client.id, async (err, doc) => {
         if (name === "0") {
             client.name = doc.name
         }
-        if (dateHour === "0") {
-            client.dateHour = doc.dateHour
-        }
         if (date === "0") {
-            client.dateHour = doc.dateHour
+            client.date = doc.date
         }
         if (hour === "0") {
-            client.dateHour = doc.dateHour
+            client.hour = doc.hour
         }
         if (body === "0") {
             client.body = doc.body
@@ -77,6 +75,10 @@ route.post('/update', async (req, res) => {
         if (size === "0") {
             client.size = doc.size
         }
+        client.dateHour = `${client.date}T${client.hour}:00`
+
+        console.log(client.dateHour)
+
         await Client.findByIdAndUpdate(client.id, {"name":client.name, "dateHour":client.dateHour, "date":client.date, "hour":client.hour, "body":client.body, "size":client.size}, async (err, doc) => {
             if (!err) {
                 console.log("Update Succeful!!")
