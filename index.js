@@ -11,6 +11,7 @@ app.use(express.json({ extended: false }))
 app.use('/api/client', require('./API/Client'))
 app.use('/api/images', require('./API/Image'))
 app.use('/api/themes', require('./API/Themes'))
+app.use('/api/finish', require('./API/Finish'))
 
 app.listen(process.env.PORT || 3001)
 
